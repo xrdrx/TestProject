@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var callStack: UIStackView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var stacksBackground: UIView!
     
     let viewModel: HomeViewModel
     
@@ -39,6 +40,12 @@ class HomeViewController: UIViewController {
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         viewModel.fetchData()
+        
+        self.stacksBackground.layer.cornerRadius = 8
+        self.stacksBackground.layer.shadowPath = UIBezierPath(rect: self.stacksBackground.bounds).cgPath
+        self.stacksBackground.layer.shadowRadius = 5
+        self.stacksBackground.layer.shadowOffset = .zero
+        self.stacksBackground.layer.shadowOpacity = 1
     }
 
     private func updateUi() {
@@ -55,21 +62,28 @@ class HomeViewController: UIViewController {
     }
     
     private func hideStacks() {
+        stacksBackground.isHidden = true
         businessStack.isHidden = true
         infoStack.isHidden = true
         callStack.isHidden = true
     }
     
     private func showStacks() {
+        stacksBackground.isHidden = false
         businessStack.isHidden = false
         infoStack.isHidden = false
         callStack.isHidden = false
     }
     
     @IBAction func swipeBusinessStack(_ sender: UISwipeGestureRecognizer) {
-        businessStack.isHidden = true
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            var stackFrame = self.stacksBackground.frame
+            stackFrame.origin.y -= (stackFrame.size.height - 25)
+            self.stacksBackground.frame = stackFrame
+        })
     }
 }
+
 
 //MARK: - Home view model delegate
 

@@ -30,10 +30,9 @@ extension TabBarViewController: UITabBarControllerDelegate {
             vc.title = "Details"
             vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(closeDetails))
             nav.addChild(vc)
+            vc.didMove(toParent: nav)
             nav.modalPresentationStyle = .overFullScreen
-            self.present(nav, animated: true) {
-                vc.didMove(toParent: nav)
-            }
+            self.present(nav, animated: true)
             return false
         }
         return true
@@ -43,4 +42,3 @@ extension TabBarViewController: UITabBarControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
-

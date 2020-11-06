@@ -29,10 +29,6 @@ class DetailsViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     private func setupViews() {
         setupLabel(label: mainLabel, font: UIFont.systemFont(ofSize: 18, weight: .semibold), alignment: .left)
         setupLabel(label: secondaryLabel, font: UIFont.systemFont(ofSize: 16, weight: .regular), alignment: .left)
