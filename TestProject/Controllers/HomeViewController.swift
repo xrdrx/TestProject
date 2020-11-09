@@ -25,6 +25,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var stacksBackground: UIView!
     
+    @IBOutlet weak var businessStackTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stacksBackgroundBottomConstraint: NSLayoutConstraint!
+    
     let viewModel: HomeViewModel
     
     required init?(coder: NSCoder) {
@@ -46,6 +49,10 @@ class HomeViewController: UIViewController {
         self.stacksBackground.layer.shadowRadius = 5
         self.stacksBackground.layer.shadowOffset = .zero
         self.stacksBackground.layer.shadowOpacity = 1
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.stacksBackground.layer.shadowPath = UIBezierPath(rect: self.stacksBackground.bounds).cgPath
     }
 
     private func updateUi() {
@@ -76,11 +83,15 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func swipeBusinessStack(_ sender: UISwipeGestureRecognizer) {
+        var backgroundFrame = self.stacksBackground.frame
+        let stackFrame = self.businessStack.frame
+        
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            var stackFrame = self.stacksBackground.frame
-            stackFrame.origin.y -= (stackFrame.size.height - 25)
-            self.stacksBackground.frame = stackFrame
-        })
+            backgroundFrame.origin.y -= (stackFrame.size.height + 15)
+            self.stacksBackground.frame = backgroundFrame
+        }) { (finished) in
+            self.businessStackTopConstraint.constant -= (stackFrame.size.height + 15)
+        }
     }
 }
 

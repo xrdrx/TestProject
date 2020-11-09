@@ -20,10 +20,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmJ-GI-DN6" userLabel="stacksBackground">
-                                <rect key="frame" x="0.0" y="171.5" width="414" height="92"/>
+                                <rect key="frame" x="0.0" y="166.5" width="414" height="112"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="veX-hp-h2j" userLabel="businessStack">
-                                        <rect key="frame" x="93" y="10" width="321" height="67"/>
+                                        <rect key="frame" x="93" y="30" width="321" height="67"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdc-Ef-wXm" userLabel="numberTagLabel">
                                                 <rect key="frame" x="0.0" y="0.0" width="111" height="17"/>
@@ -45,14 +45,21 @@
                                             </label>
                                         </subviews>
                                         <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="L8g-JB-L4z" appends="YES" id="ciY-Wd-5R4"/>
-                                        </connections>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dw-LA-MIu" userLabel="dragLine">
+                                        <rect key="frame" x="194.5" y="104" width="25" height="3"/>
+                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="3" id="72M-5r-qmZ"/>
+                                            <constraint firstAttribute="width" constant="25" id="76F-NS-INV"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="4dw-LA-MIu" secondAttribute="bottom" constant="5" id="ADp-38-uXZ"/>
                                     <constraint firstAttribute="trailing" secondItem="veX-hp-h2j" secondAttribute="trailing" id="QzW-gQ-SqI"/>
+                                    <constraint firstItem="4dw-LA-MIu" firstAttribute="centerX" secondItem="fmJ-GI-DN6" secondAttribute="centerX" id="X8V-H7-yc0"/>
                                     <constraint firstAttribute="bottom" secondItem="veX-hp-h2j" secondAttribute="bottom" constant="15" id="fv5-D6-Au3"/>
                                 </constraints>
                             </view>
@@ -122,10 +129,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vEe-fV-8gp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="fmJ-GI-DN6" firstAttribute="top" secondItem="ydO-jC-gfs" secondAttribute="bottom" constant="-10" id="1cz-N1-b0p"/>
-                            <constraint firstItem="veX-hp-h2j" firstAttribute="top" secondItem="ydO-jC-gfs" secondAttribute="bottom" id="3E7-Oj-zde"/>
+                            <constraint firstItem="fmJ-GI-DN6" firstAttribute="top" secondItem="ydO-jC-gfs" secondAttribute="bottom" constant="-15" id="1cz-N1-b0p"/>
                             <constraint firstItem="Old-dJ-fxc" firstAttribute="centerX" secondItem="KwN-5m-JbK" secondAttribute="centerX" id="8ej-Dg-13t"/>
+                            <constraint firstItem="veX-hp-h2j" firstAttribute="top" secondItem="ydO-jC-gfs" secondAttribute="bottom" constant="15" id="AD8-Gx-f12"/>
                             <constraint firstItem="ydO-jC-gfs" firstAttribute="leading" secondItem="vEe-fV-8gp" secondAttribute="leading" id="Nck-9q-rhX"/>
                             <constraint firstItem="ydO-jC-gfs" firstAttribute="trailing" secondItem="vEe-fV-8gp" secondAttribute="trailing" id="UHV-Ce-6v3"/>
                             <constraint firstItem="fmJ-GI-DN6" firstAttribute="leading" secondItem="vEe-fV-8gp" secondAttribute="leading" id="bpW-Dl-h8U"/>
@@ -134,6 +142,9 @@
                             <constraint firstItem="ydO-jC-gfs" firstAttribute="top" secondItem="vEe-fV-8gp" secondAttribute="top" id="xh3-yk-m5l"/>
                             <constraint firstItem="Old-dJ-fxc" firstAttribute="centerY" secondItem="KwN-5m-JbK" secondAttribute="centerY" id="zwT-9C-G9R"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="niW-9T-wUd" appends="YES" id="2rG-95-Gwb"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Main Page" id="wgF-to-JzW"/>
                     <connections>
@@ -141,6 +152,7 @@
                         <outlet property="businessNumber" destination="bsl-OV-jpA" id="MJE-dH-ImO"/>
                         <outlet property="businessNumberName" destination="zJb-h3-98X" id="B90-Sm-k7w"/>
                         <outlet property="businessStack" destination="veX-hp-h2j" id="rjg-df-2Aq"/>
+                        <outlet property="businessStackTopConstraint" destination="AD8-Gx-f12" id="6mF-4X-4uv"/>
                         <outlet property="callStack" destination="OA5-ue-1hW" id="7iV-1d-PGY"/>
                         <outlet property="callStateImage" destination="6a7-ag-O9M" id="Hfq-pA-oCg"/>
                         <outlet property="callStateLabel" destination="6Wg-As-Upl" id="Sag-um-8EL"/>
@@ -148,12 +160,13 @@
                         <outlet property="name" destination="et7-lc-e0U" id="rg6-yC-SNC"/>
                         <outlet property="number" destination="8FB-DA-u0v" id="xwu-CI-GQr"/>
                         <outlet property="stacksBackground" destination="fmJ-GI-DN6" id="VDG-pX-ntk"/>
+                        <outlet property="stacksBackgroundBottomConstraint" destination="fv5-D6-Au3" id="AH5-HT-gGL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pn0-M0-bl2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="up" id="L8g-JB-L4z">
+                <swipeGestureRecognizer direction="up" id="niW-9T-wUd">
                     <connections>
-                        <action selector="swipeBusinessStack:" destination="67b-Xb-5XK" id="oVa-cS-7uV"/>
+                        <action selector="swipeBusinessStack:" destination="67b-Xb-5XK" id="aeA-FN-x6N"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
